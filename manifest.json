@@ -62,7 +62,7 @@
             "type": "STRING",
             "required": true
           }],
-          "tql": "SELECT * FROM aws_s3.list_objects_v2\n  WHERE Bucket=@bucket_name\n  AND prefix=@log_path\n  AND Size > 0\n   limit 2 -- for testing"
+          "tql": "SELECT * FROM aws_s3.list_objects_v2\n  WHERE Bucket=@bucket_name\n  AND prefix=@log_path\n  AND Size > 0\n  -- limit 2 -- for testing"
         }
       }, {
         "id": "get_log_files",
