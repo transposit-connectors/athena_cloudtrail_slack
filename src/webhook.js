@@ -15,9 +15,10 @@
 	}
   console.log("here");
   console.log(http_event.parsed_body);
+  setImmediate(() => {
+    api.run("this.post_chat_message",{text: "hello there"});
+  });
    return {
     status_code: 200,
-    headers: { "Content-Type": "application/json" },
-    body: { text: "this is a test"}
   };
 }

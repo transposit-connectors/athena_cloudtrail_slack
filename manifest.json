@@ -84,7 +84,11 @@
       }, {
         "id": "post_chat_message",
         "tql": {
-          "tql": "SELECT * FROM slack.post_chat_message\n  WHERE $body=(SELECT {\n   \n    'channel' : 'cloudtrail',\n    \n    'as_user' : false,   \n    'text' : 'test',\n\n  })\n\n/*\n * For sample code and reference material, visit\n * https://www.transposit.com/docs/get-started/sql-quickstart\n */"
+          "parameters": [{
+            "name": "text",
+            "type": "STRING"
+          }],
+          "tql": "SELECT * FROM slack.post_chat_message\n  WHERE $body=(SELECT {\n   \n    'channel' : 'cloudtrail',\n    \n    'as_user' : false,   \n    'text' : @text,\n\n  })\n"
         }
       }, {
         "id": "post_logfile_process_to_slack",
