@@ -20,8 +20,8 @@
     };
   }
   
-  const check_today = text_we_saw.contains("check today");
-  const check_yesterday = text_we_saw.contains("check yesterday");
+  const check_today = text_we_saw.includes("check today");
+  const check_yesterday = text_we_saw.includes("check yesterday");
 
   if (!text_we_saw) {
     setImmediate(() => {
