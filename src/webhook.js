@@ -23,6 +23,13 @@
   const check_today = text_we_saw.contains("check today");
   const check_yesterday = text_we_saw.contains("check yesterday");
 
+  if (!text_we_saw) {
+    setImmediate(() => {
+      api.run("this.post_chat_message", {
+        text: "hello there. I saw: " + text_we_saw +". But I don't understand what to do. Please either ask me to 'check today' or 'check yesterday'"
+      });
+    });
+  }
   
   if (!(check_today || check_yesterday)) {
     setImmediate(() => {
