@@ -13,5 +13,9 @@
     	body: http_event.parsed_body.challenge
   	};
 	}
-  console.log("abc");
+   return {
+    status_code: 200,
+    headers: { "Content-Type": "application/json" },
+    body: { text: JSON.stringify(http_event, null, 2) }
+  };
 }
