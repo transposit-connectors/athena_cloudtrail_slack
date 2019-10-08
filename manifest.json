@@ -92,6 +92,12 @@
           "js": "post_logfile_process_to_slack.js",
           "lang": "js"
         }
+      }, {
+        "id": "stash_clear_out",
+        "function": {
+          "js": "stash_clear_out.js",
+          "lang": "js"
+        }
       }],
       "dataConnections": [{
         "ref": "slack_identify.raw",
