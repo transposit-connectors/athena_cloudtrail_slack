@@ -107,7 +107,17 @@
           }
         }
       }, {
-        "ref": "slack.raw"
+        "ref": "slack.raw",
+        "overrides": {
+          "swagger": {
+            "oauthConfig": {
+              "scope": "chat:write:bot bot",
+              "accessTokenPath": "bot.bot_access_token"
+            },
+            "executionLimits": {
+            }
+          }
+        }
       }, {
         "ref": "aws_s3",
         "overrides": {
