@@ -13,4 +13,5 @@
     	body: http_event.parsed_body.challenge
   	};
 	}
+  console.log("abc");
 }
