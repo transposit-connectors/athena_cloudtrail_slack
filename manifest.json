@@ -45,6 +45,33 @@
         "tql": {
           "tql": "-- This SQL operation is useful to test the message you've\n-- constructed for your webhook. If you provide a Slack\n-- auth in \"Auth & user settings\", it will post a message\n-- to your Slackbot channel.\nSELECT * FROM slack.post_chat_message AS A\nJOIN this.get_slack_message AS B\nON A.$body.blocks = B.blocks\nAND A.$body.text = B.text\nWHERE A.$body.channel = (SELECT user_id from slack.test_auth)"
         }
+      }, {
+        "id": "list_objects",
+        "tql": {
+          "parameters": [{
+            "name": "bucket_name",
+            "description": "Cloudtrail bucket name",
+            "type": "STRING",
+            "required": true
+          }, {
+            "name": "log_path",
+            "description": "Path to cloudtrail logs",
+            "type": "STRING",
+            "required": true
+          }],
+          "tql": "SELECT Key FROM aws_s3.list_objects_v2\n  WHERE Bucket=@bucket_name\n  --AND prefix=@log_path\n  AND prefix != 'AWSLogs/425414788231/CloudTrail/us-east-2/2019/10/08/425414788231_CloudTrail_us-east-2_20191008T0250Z_A3fA0ZBQgkhsIIXO.json.gz'\n  --limit 10 -- for testing"
+        }
+      }, {
+        "id": "get_log_files",
+        "function": {
+          "js": "get_log_files.js",
+          "lang": "js"
+        }
+      }, {
+        "id": "get_object",
+        "tql": {
+          "tql": "SELECT * FROM aws_s3.get_object\n  WHERE Bucket='mooreds-cloudtrail'\n  AND Key='AWSLogs/425414788231/CloudTrail/us-east-2/2019/10/08/425414788231_CloudTrail_us-east-2_20191008T0250Z_A3fA0ZBQgkhsIIXO.json.gz'\n "
+        }
       }],
       "dataConnections": [{
         "ref": "slack_identify.raw",
