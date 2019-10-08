@@ -36,10 +36,12 @@
           if (ip_address_to_country[ip] != 'US') {
             entry.xpriority = "HIGH";
             entry.xcountry_code = ip_address_to_country[ip];
+            console.log("saw non us country");
           }
         }
         if (entry.eventSource == "iam.amazonaws.com") {
           entry.xpriority = "HIGH";
+          console.log("saw IAM event");
         }
         if (entry.eventSource == "s3.amazonaws.com") {
           entry.xpriority = "MED";
