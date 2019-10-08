@@ -46,7 +46,7 @@
       }, {
         "id": "test_post_message",
         "tql": {
-          "tql": "-- This SQL operation is useful to test the message you've\n-- constructed for your webhook. If you provide a Slack\n-- auth in \"Auth & user settings\", it will post a message\n-- to your Slackbot channel.\nSELECT * FROM slack.post_chat_message AS A\nJOIN this.get_slack_message AS B\nON A.$body.blocks = B.blocks\nAND A.$body.text = B.text\nWHERE A.$body.channel = (SELECT user_id from slack.test_auth)"
+          "tql": "-- This SQL operation is useful to test the message you've\n-- constructed for your webhook. If you provide a Slack\n-- auth in \"Auth & user settings\", it will post a message\n-- to your Slackbot channel.\nSELECT * FROM slack.post_chat_message AS A\nJOIN this.get_slack_message AS B\nON A.$body.blocks = B.blocks\nAND A.$body.text = B.text\nWHERE A.$body.channel = 'cloudtrail'"
         }
       }, {
         "id": "list_objects",
@@ -80,6 +80,17 @@
             "required": true
           }],
           "tql": "SELECT country_code FROM ipstack.getPhysicalAddressFromIP\n  WHERE ipaddress=@ipaddress\n\n/*\n * For sample code and reference material, visit\n * https://www.transposit.com/docs/get-started/sql-quickstart\n */"
+        }
+      }, {
+        "id": "post_chat_message",
+        "tql": {
+          "tql": "SELECT * FROM slack.post_chat_message\n  WHERE $body=(SELECT {\n   \n    'channel' : 'cloudtrail',\n    \n    'as_user' : false,   \n    'text' : 'test',\n\n  })\n\n/*\n * For sample code and reference material, visit\n * https://www.transposit.com/docs/get-started/sql-quickstart\n */"
+        }
+      }, {
+        "id": "post_logfile_process_to_slack",
+        "function": {
+          "js": "post_logfile_process_to_slack.js",
+          "lang": "js"
         }
       }],
       "dataConnections": [{
