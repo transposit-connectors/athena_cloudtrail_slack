@@ -39,6 +39,17 @@
     });
   }
   
+  let text = "";
+  if (check_today) {
+    text = "OK, I'll see if there are any events for today."
+  }
+  
+  setImmediate(() => {
+    api.run("this.post_chat_message", {
+      text: text
+    });
+  });
+  
   return {
     status_code: 200,
   };
