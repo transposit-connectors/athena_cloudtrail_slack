@@ -15,8 +15,9 @@
 	}
   console.log("here");
   console.log(http_event.parsed_body);
+  const text_we_saw = http_event.parsed_body.event.text;
   setImmediate(() => {
-    api.run("this.post_chat_message",{text: "hello there"});
+    api.run("this.post_chat_message",{text: "hello there. I saw: "+text_we_saw});
   });
    return {
     status_code: 200,
