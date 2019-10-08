@@ -52,10 +52,10 @@
     });
     
     // athena wants json with each record on a different line
-    const body = result_records.join("\n");
-    
+    const body = result_records.map(r => JSON.stringify(r)).join("\n");
     // can't gzip it just yet
     const processed_key = (processed_prefix + key).replace(".gz","");
+    console.log("pushing: "+processed_key);
     const res = api.query("SELECT * FROM aws_s3.put_object WHERE Bucket=@bucket_name AND Key=@key AND $body=@body", {
       bucket_name: bucket_name,
       key: processed_key,
