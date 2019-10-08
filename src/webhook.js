@@ -16,9 +16,12 @@
   console.log("here");
   console.log(http_event.parsed_body);
   const text_we_saw = http_event.parsed_body.event.text;
-  setImmediate(() => {
-    //api.run("this.post_chat_message",{text: "hello there. I saw: "+text_we_saw});
-  });
+  const sent_by_bot = http_event.parsed_body.event.bot_id != null;
+  if (!sent_by_bot) {
+  	setImmediate(() => {
+    	api.run("this.post_chat_message",{text: "hello there. I saw: "+text_we_saw});
+  	});
+  }
    return {
     status_code: 200,
   };
