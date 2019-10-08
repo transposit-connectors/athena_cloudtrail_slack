@@ -55,7 +55,7 @@
       key: processed_key,
       body: JSON.stringify(result_object)
     });
-    console.log(res);
+    //console.log(res);
     if (res != "success") {
       console.log("error processing: "+key);
     } else {
@@ -68,8 +68,3 @@
   // console.log("there");
   return { status: 200 };
 }
-
-/*
- * For sample code and reference material, visit
- * https://www.transposit.com/docs/references/js-operations
- */
