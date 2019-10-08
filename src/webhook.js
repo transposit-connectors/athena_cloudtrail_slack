@@ -41,7 +41,7 @@
   
   let text = "";
   if (check_today) {
-    text = "OK, I'll see if there are any events for today."
+    text = "OK, I'll see if there are any events for today..."
   }
   
   setImmediate(() => {

@@ -50,15 +50,16 @@
       });
       
     });
-    const result_object = {};
-    result_object.Records = result_records;
+    
+    // athena wants json with each record on a different line
+    const body = result_records.join("\n");
     
     // can't gzip it just yet
     const processed_key = (processed_prefix + key).replace(".gz","");
     const res = api.query("SELECT * FROM aws_s3.put_object WHERE Bucket=@bucket_name AND Key=@key AND $body=@body", {
       bucket_name: bucket_name,
       key: processed_key,
-      body: JSON.stringify(result_object)
+      body: body
     });
     //console.log(res);
     if (res != "success") {
