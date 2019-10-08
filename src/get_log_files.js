@@ -45,17 +45,16 @@
     const result_object = {};
     result_object.Records = result_records;
     const processed_key = processed_prefix + key;
-    const res = api.query("SELECT * FROM aws_s3.put_object WHERE Bucket=@bucket_name AND Key=@key AND $body=@body",
-                          {
+    const res = api.query("SELECT * FROM aws_s3.put_object WHERE Bucket=@bucket_name AND Key=@key AND $body=@body", {
       bucket_name: bucket_name,
       key: processed_key,
-      body: JSON.stringify(result_object);
+      body: JSON.stringify(result_object)
     })
     //console.log(content[0]);
   });
-  console.log("here");
-  console.log(ip_address_to_country);
-  console.log("there");
+  // console.log("here");
+  // console.log(ip_address_to_country);
+  // console.log("there");
   return results;
 }
 
