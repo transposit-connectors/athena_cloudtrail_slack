@@ -62,7 +62,7 @@
             "type": "STRING",
             "required": true
           }],
-          "tql": "SELECT * FROM aws_s3.list_objects_v2\n  WHERE Bucket=@bucket_name\n  AND prefix=@log_path\n  AND Size > 0\n--  AND prefix != 'AWSLogs/425414788231/CloudTrail/us-east-2/2019/10/'\n  --limit 10 -- for testing"
+          "tql": "SELECT * FROM aws_s3.list_objects_v2\n  WHERE Bucket=@bucket_name\n  AND prefix=@log_path\n  AND Size > 0\n  limit 2 -- for testing"
         }
       }, {
         "id": "get_log_files",
@@ -79,6 +79,22 @@
         "id": "list_objects_v2",
         "tql": {
           "tql": "SELECT Key\nFROM (SELECT *\n  FROM aws_s3.list_objects_v2\n  WHERE Bucket='mooreds-cloudtrail'\n     AND prefix = 'AWSLogs/425414788231/CloudTrail/us-east-2/') \nWHERE Key != 'AWSLogs/425414788231/CloudTrail/us-east-2/2019/10/08/425414788231_CloudTrail_us-east-2_20191008T0250Z_A3fA0ZBQgkhsIIXO.json.gz' "
+        }
+      }, {
+        "id": "get_country_from_ip",
+        "tql": {
+          "parameters": [{
+            "name": "ipaddress",
+            "description": "IP Address to lookup",
+            "type": "STRING",
+            "required": true
+          }],
+          "tql": "SELECT country_code FROM ipstack.getPhysicalAddressFromIP\n  WHERE ipaddress=@ipaddress\n\n/*\n * For sample code and reference material, visit\n * https://www.transposit.com/docs/get-started/sql-quickstart\n */"
+        }
+      }, {
+        "id": "put_object",
+        "tql": {
+          "tql": "SELECT * FROM aws_s3.put_object\n  WHERE Bucket='<required_string>'\n  AND Key='<required_string>'\n  AND x-amz-acl='private | public-read | public-read-write | authenticated-read | aws-exec-read | bucket-owner-read | bucket-owner-full-control'\n  AND Cache-Control='<string>'\n  AND Content-Disposition='<string>'\n  AND Content-Encoding='<string>'\n  AND Content-Language='<string>'\n  AND Content-Length=<number>\n  AND Content-MD5='<string>'\n  AND Content-Type='<string>'\n  AND Expires='<timestamp>'\n  AND x-amz-grant-full-control='<string>'\n  AND x-amz-grant-read='<string>'\n  AND x-amz-grant-read-acp='<string>'\n  AND x-amz-grant-write-acp='<string>'\n  AND x-amz-meta-=(SELECT {\n    '<string>' : '<string>'\n  })\n  AND x-amz-server-side-encryption='AES256 | aws:kms'\n  AND x-amz-storage-class='STANDARD | REDUCED_REDUNDANCY | STANDARD_IA | ONEZONE_IA'\n  AND x-amz-website-redirect-location='<string>'\n  AND x-amz-server-side-encryption-customer-algorithm='<string>'\n  AND x-amz-server-side-encryption-customer-key='<string>'\n  AND x-amz-server-side-encryption-customer-key-MD5='<string>'\n  AND x-amz-server-side-encryption-aws-kms-key-id='<string>'\n  AND x-amz-request-payer='requester'\n  AND x-amz-tagging='<string>'\n  AND $body=''\n\n/*\n * For sample code and reference material, visit\n * https://www.transposit.com/docs/get-started/sql-quickstart\n */"
         }
       }],
       "dataConnections": [{
