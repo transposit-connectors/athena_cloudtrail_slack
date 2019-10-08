@@ -3,15 +3,17 @@
   const processed_prefix = 'processed/AWSLogs/425414788231/CloudTrail/us-east-2/2019/10/';
   const results = api.run("this.list_objects",{
     bucket_name: bucket_name,
-    log_path: 'AWSLogs/425414788231/CloudTrail/us-east-2/2019/10/'
+    log_path: 'AWSLogs/425414788231/CloudTrail/' // CloudTrail/us-east-2/2019/10/'
   });
   results.forEach((keyObj) => {
     //console.log(keyObj.Key);
     const content = api.query("SELECT * FROM aws_s3.get_object WHERE Bucket=@bucket_name AND Key=@key",{key:keyObj.Key, bucket_name: bucket_name});
+    //console.log(content);
+    //if (content )
     content.forEach((record_obj) => {
       const records = record_obj.Records;
       const record_keys = Object.keys(records);
-      console.log(record_keys);
+      //console.log(record_keys);
       record_keys.forEach((rk) => {
         const entry = records[rk];
         if (entry.eventSource == "s3.amazonaws.com") {return}

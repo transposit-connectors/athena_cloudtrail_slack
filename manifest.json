@@ -59,7 +59,7 @@
             "type": "STRING",
             "required": true
           }],
-          "tql": "SELECT Key FROM aws_s3.list_objects_v2\n  WHERE Bucket=@bucket_name\n  --AND prefix=@log_path\n  AND prefix != 'AWSLogs/425414788231/CloudTrail/us-east-2/2019/10/08/425414788231_CloudTrail_us-east-2_20191008T0250Z_A3fA0ZBQgkhsIIXO.json.gz'\n  --limit 10 -- for testing"
+          "tql": "SELECT * FROM aws_s3.list_objects_v2\n  WHERE Bucket=@bucket_name\n  AND prefix=@log_path\n  AND Size > 0\n--  AND prefix != 'AWSLogs/425414788231/CloudTrail/us-east-2/2019/10/'\n  --limit 10 -- for testing"
         }
       }, {
         "id": "get_log_files",
@@ -71,6 +71,11 @@
         "id": "get_object",
         "tql": {
           "tql": "SELECT * FROM aws_s3.get_object\n  WHERE Bucket='mooreds-cloudtrail'\n  AND Key='AWSLogs/425414788231/CloudTrail/us-east-2/2019/10/08/425414788231_CloudTrail_us-east-2_20191008T0250Z_A3fA0ZBQgkhsIIXO.json.gz'\n "
+        }
+      }, {
+        "id": "list_objects_v2",
+        "tql": {
+          "tql": "SELECT Key\nFROM (SELECT *\n  FROM aws_s3.list_objects_v2\n  WHERE Bucket='mooreds-cloudtrail'\n     AND prefix = 'AWSLogs/425414788231/CloudTrail/us-east-2/') \nWHERE Key != 'AWSLogs/425414788231/CloudTrail/us-east-2/2019/10/08/425414788231_CloudTrail_us-east-2_20191008T0250Z_A3fA0ZBQgkhsIIXO.json.gz' "
         }
       }],
       "dataConnections": [{
