@@ -12,6 +12,9 @@
       }, {
         "name": "transposit/aws_s3:v3.*.*",
         "alias": "aws_s3"
+      }, {
+        "name": "transposit/opencage:v1.*.*",
+        "alias": "opencage"
       }],
       "operations": [{
         "id": "webhook",
