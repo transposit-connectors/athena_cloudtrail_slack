@@ -25,6 +25,8 @@
       //console.log(record_keys);
       record_keys.forEach((rk) => {
         const entry = records[rk];
+        
+        // break this out to a sep function for easy editing?
         if (entry.sourceIPAddress) {
           const ip = entry.sourceIPAddress;
           if (ip_address_to_country[ip] === undefined) {
