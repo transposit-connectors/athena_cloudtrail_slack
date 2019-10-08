@@ -6,7 +6,8 @@
     bucket_name: bucket_name,
     log_path: 'AWSLogs/425414788231/CloudTrail/' // CloudTrail/us-east-2/2019/10/'
   });
-
+  
+  let count = 0;
   const ip_address_to_country = {}; // to save on ip calls, we only get 10k
   results.forEach((keyObj) => {
     const result_records = [];
@@ -60,11 +61,15 @@
       console.log("error processing: "+key);
     } else {
       stash.put(key+stash_suffix,true);
+      count++;
     }
     //console.log(content[0]);
   });
   // console.log("here");
   // console.log(ip_address_to_country);
   // console.log("there");
-  return { status: 200 };
+  return { 
+    status: 200,     
+    count: count
+  };
 }
