@@ -9,6 +9,9 @@
       }, {
         "name": "transposit/slack_webhook:v1.*.*",
         "alias": "slack_webhook"
+      }, {
+        "name": "transposit/aws_s3:v3.*.*",
+        "alias": "aws_s3"
       }],
       "operations": [{
         "id": "webhook",
@@ -20,7 +23,8 @@
             },
             "type": "OBJECT"
           }],
-          "js": "webhook.js"
+          "js": "webhook.js",
+          "lang": "js"
         },
         "access": {
           "requireApiKey": true,
@@ -33,7 +37,8 @@
             "name": "user",
             "type": "STRING"
           }],
-          "js": "get_slack_message.js"
+          "js": "get_slack_message.js",
+          "lang": "js"
         }
       }, {
         "id": "test_post_message",
