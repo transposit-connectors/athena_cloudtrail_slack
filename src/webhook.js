@@ -13,9 +13,11 @@
     	body: http_event.parsed_body.challenge
   	};
 	}
+  console.log("here");
+  console.log(http_event.parsed_body);
    return {
     status_code: 200,
     headers: { "Content-Type": "application/json" },
-    body: { text: JSON.stringify(http_event, null, 2) }
+    body: { text: "this is a test"}
   };
 }
