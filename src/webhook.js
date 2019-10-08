@@ -27,7 +27,7 @@
   if (!(check_today || check_yesterday)) {
     setImmediate(() => {
       api.run("this.post_chat_message", {
-        text: "hello there. I saw: " + text_we_saw +". But I don't understand what to do. Please either ask me to 'check today' or 'check yesterday'";
+        text: "hello there. I saw: " + text_we_saw +". But I don't understand what to do. Please either ask me to 'check today' or 'check yesterday'"
       });
     });
   }
