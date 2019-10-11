@@ -50,7 +50,10 @@
     api.run("this.post_chat_message", {
       text: text
     });
-    const athena_output_s3_path = bucket_name + "/" + athena_prefix;
+    console.log("here2");
+    
+    const athena_output_s3_path = "s3://"+bucket_name + "/" + athena_prefix;
+    console.log(athena_output_s3_path);
     api.run("athena_library.runQuery", {
       query:"select * from default.json_table  where xpriority = 'HIGH' limit 5",                                
       resultlocation: athena_output_s3_path
