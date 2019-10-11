@@ -47,11 +47,6 @@
           "lang": "js"
         }
       }, {
-        "id": "test_post_message",
-        "tql": {
-          "tql": "-- This SQL operation is useful to test the message you've\n-- constructed for your webhook. If you provide a Slack\n-- auth in \"Auth & user settings\", it will post a message\n-- to your Slackbot channel.\nSELECT * FROM slack.post_chat_message AS A\nJOIN this.get_slack_message AS B\nON A.$body.blocks = B.blocks\nAND A.$body.text = B.text\nWHERE A.$body.channel = 'cloudtrail'"
-        }
-      }, {
         "id": "list_objects",
         "tql": {
           "parameters": [{
@@ -104,6 +99,12 @@
         "id": "stash_clear_out",
         "function": {
           "js": "stash_clear_out.js",
+          "lang": "js"
+        }
+      }, {
+        "id": "post_user_query_results_to_slack",
+        "function": {
+          "js": "post_user_query_results_to_slack.js",
           "lang": "js"
         }
       }],
