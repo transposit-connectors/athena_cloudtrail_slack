@@ -57,15 +57,15 @@
       query:"select * from default.json_table  where xpriority = 'HIGH' limit 5",                                
       resultlocation: athena_output_s3_path
     });
-    stash.put("query-id", results.queryId);
-    console.log(results);
+    const queryId = results.queryId;
+    stash.put("query-id", queryId);
+    console.log(queryId);
   });
   
   let moment = require('moment-timezone-with-data.js');
   let inOneMinute = moment().add(1, "minutes").format();
   task.create("this.post_user_query_results_to_slack")
     .runOnce(inOneMinute);
- 
   
   return {
     status_code: 200,
