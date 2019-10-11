@@ -9,6 +9,8 @@
     };
   }
   
+  const bucket_name = 'mooreds-cloudtrail';
+  const athena_prefix = 'athena-output/';
   console.log("here");
   console.log(http_event.parsed_body);
   const text_we_saw = http_event.parsed_body.event.text;
@@ -41,14 +43,22 @@
   
   let text = "";
   if (check_today) {
-    text = "OK, I'll see if there are any events for today..."
+    text = "OK, I'll see if there are any events for today.... This may take a minute."
   }
   
   setImmediate(() => {
     api.run("this.post_chat_message", {
       text: text
     });
+    const athena_output_s3_path = bucket_name + "/" + athena_prefix;
+    api.run("athena_library.runQuery", {
+      query:"select * from default.json_table  where xpriority = 'HIGH' limit 5",                                
+      resultlocation: athena_output_s3_path
+    });
+    // store in stash
   });
+  
+  // pull the query id off the stack
   
   return {
     status_code: 200,
