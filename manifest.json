@@ -15,6 +15,9 @@
       }, {
         "name": "mooredstransposit/ipstack:latest",
         "alias": "ipstack"
+      }, {
+        "name": "mooredstransposit/athena_library:latest",
+        "alias": "athena_library"
       }],
       "operations": [{
         "id": "webhook",
