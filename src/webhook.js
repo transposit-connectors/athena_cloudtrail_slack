@@ -50,7 +50,6 @@
     api.run("this.post_chat_message", {
       text: text
     });
-    console.log("here2");
     
     const athena_output_s3_path = "s3://"+bucket_name + "/" + athena_prefix;
     console.log(athena_output_s3_path);
@@ -64,8 +63,7 @@
   
   let moment = require('moment-timezone-with-data.js');
   let inOneMinute = moment().add(1, "minutes").format();
-  task.create("this.helloworld")
-    .setName("Hello World")            // Note: setName() is optional.
+  task.create("this.post_user_query_results_to_slack")
     .runOnce(inOneMinute);
  
   
