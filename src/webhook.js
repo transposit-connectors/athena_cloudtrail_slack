@@ -56,7 +56,7 @@
     const results = api.run("athena_library.runQuery", {
       query:"select * from default.json_table  where xpriority = 'HIGH' limit 5",                                
       resultlocation: athena_output_s3_path
-    });
+    })[0];
     const queryId = results.queryId;
     stash.put("query-id", queryId);
     console.log(queryId);
