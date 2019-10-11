@@ -7,7 +7,7 @@
         "title": "Slack",
         "description": "Authorize this connector if you want to use the Slack API."
       }, {
-        "name": "transposit/slack_webhook:v1.*.*",
+        "name": "transposit/slack_webhook:v2.*.*",
         "alias": "slack_webhook"
       }, {
         "name": "transposit/aws_s3:v3.*.*",
