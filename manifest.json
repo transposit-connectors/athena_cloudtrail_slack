@@ -152,6 +152,15 @@
             }
           }
         }
+      }, {
+        "ref": "athena_library.aws_athena",
+        "overrides": {
+          "aws": {
+            "region": "us-east-2",
+            "executionLimits": {
+            }
+          }
+        }
       }],
       "javascriptAPIVersion": "3",
       "source": "src",
