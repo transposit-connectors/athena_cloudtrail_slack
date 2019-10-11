@@ -63,7 +63,7 @@
   });
   
   let moment = require('moment-timezone-with-data.js');
-  let inOneMinute = moment().add(1, "minutes").format();
+  let inOneMinute = moment().add(10, "seconds").format();
   task.create("this.post_user_query_results_to_slack")
     .runOnce(inOneMinute);
   
