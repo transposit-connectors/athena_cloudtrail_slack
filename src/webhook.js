@@ -71,3 +71,7 @@
     status_code: 200,
   };
 }
+
+// TODO
+// break out enrich to sep function
+// make check today useful
