@@ -77,7 +77,7 @@
             "type": "STRING",
             "required": true
           }],
-          "tql": "SELECT country_code FROM ipstack.getPhysicalAddressFromIP\n  WHERE ipaddress=@ipaddress\n\n/*\n * For sample code and reference material, visit\n * https://www.transposit.com/docs/get-started/sql-quickstart\n */"
+          "tql": "SELECT country_code FROM ipstack.get_physical_address_from_ip\n  WHERE ipaddress=@ipaddress\n\n/*\n * For sample code and reference material, visit\n * https://www.transposit.com/docs/get-started/sql-quickstart\n */"
         }
       }, {
         "id": "post_chat_message",
