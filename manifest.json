@@ -13,9 +13,6 @@
         "name": "transposit/aws_s3:v3.*.*",
         "alias": "aws_s3"
       }, {
-        "name": "mooredstransposit/ipstack:latest",
-        "alias": "ipstack"
-      }, {
         "name": "mooredstransposit/athena_library:latest",
         "alias": "athena_library"
       }],
