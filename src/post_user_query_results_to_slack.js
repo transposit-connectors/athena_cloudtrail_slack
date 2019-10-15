@@ -1,12 +1,15 @@
 (params) => {
-  let text = "test";
+  let text = "The following high priority events happened today\n";
   const queryId = stash.get("query-id");
-  console.log("here5");
-  console.log(queryId);
+  // console.log(queryId);
   const results = api.run("athena_library.getQueryResults", {queryId: queryId });
-   
-   api.run("this.post_chat_message", {
-      text: text + JSON.stringify(results)
+  
+  text += results.map((r) => {
+    return "event " + r.eventid + " happened at " + r.eventtime + " in region: "+ r.awsregion;
+  }).join("\n");
+  
+  api.run("this.post_chat_message", {
+      text: text
     });
   return {
     mission: "complete"
