@@ -54,7 +54,7 @@
     const athena_output_s3_path = "s3://"+bucket_name + "/" + athena_prefix;
     console.log(athena_output_s3_path);
     const results = api.run("athena_library.runQuery", {
-      query:"select * from default.json_table  where xpriority = 'HIGH' limit 5",                                
+      query:"select * from default.cloudtrail_enriched where xpriority = 'HIGH' limit 5",                                
       resultlocation: athena_output_s3_path
     })[0];
     const queryId = results.queryId;
