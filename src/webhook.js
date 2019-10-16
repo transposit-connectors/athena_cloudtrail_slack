@@ -25,20 +25,15 @@
   const check_most_recent = text_we_saw.includes("check most recent");
   const check_yesterday = text_we_saw.includes("check yesterday");
 
-  if (!text_we_saw) {
+  if (!(text_we_saw||check_most_recent)) {
     setImmediate(() => {
       api.run("this.post_chat_message", {
         text: "hello there. I saw: " + text_we_saw +". But I don't understand what to do. Please either ask me to 'check most recent'"
       });
     });
-  }
-  
-  if (!(check_most_recent)) {
-    setImmediate(() => {
-      api.run("this.post_chat_message", {
-        text: "hello there. I saw: '" + text_we_saw +"'. But I don't understand what to do. Please either ask me to 'check most recent'"
-      });
-    });
+    return {
+      status_code: 200,
+    };
   }
   
   let text = "";
