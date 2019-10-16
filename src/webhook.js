@@ -43,7 +43,7 @@
   
   let text = "";
   if (check_most_recent) {
-    text = "OK, I'll see if there are any events for today.... This may take a minute."
+    text = "OK, I'll see if there are any recent events.... This may take a minute."
   }
   
   setImmediate(() => {
