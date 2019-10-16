@@ -27,7 +27,7 @@
   if ((!text_we_saw) || (!check_most_recent)) {
     setImmediate(() => {
       api.run("this.post_chat_message", {
-        text: "hello there. I saw: " + text_we_saw +". But I don't understand what to do. Please either ask me to 'check most recent'"
+        text: "hello there. I saw: " + text_we_saw +". But I don't understand what to do. Please ask me to 'check most recent'"
       });
     });
     return {
