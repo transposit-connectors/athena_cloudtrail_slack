@@ -22,7 +22,7 @@
     };
   }
   
-  const check_today = text_we_saw.includes("check today");
+  const check_most_recent = text_we_saw.includes("check most recent");
   const check_yesterday = text_we_saw.includes("check yesterday");
 
   if (!text_we_saw) {
@@ -33,16 +33,16 @@
     });
   }
   
-  if (!(check_today || check_yesterday)) {
+  if (!(check_most_recent)) {
     setImmediate(() => {
       api.run("this.post_chat_message", {
-        text: "hello there. I saw: " + text_we_saw +". But I don't understand what to do. Please either ask me to 'check today'"
+        text: "hello there. I saw: '" + text_we_saw +"'. But I don't understand what to do. Please either ask me to 'check today'"
       });
     });
   }
   
   let text = "";
-  if (check_today) {
+  if (check_most_recent) {
     text = "OK, I'll see if there are any events for today.... This may take a minute."
   }
   
@@ -54,7 +54,7 @@
     const athena_output_s3_path = "s3://"+bucket_name + "/" + athena_prefix;
     console.log(athena_output_s3_path);
     const results = api.run("athena_library.runQuery", {
-      query:"select * from default.cloudtrail_enriched where xpriority = 'HIGH' limit 5",                                
+      query:"select * from cloudtrail_enriched where xpriority = 'HIGH' order by eventtime desc limit 5",                                
       resultlocation: athena_output_s3_path
     })[0];
     const queryId = results.queryId;
