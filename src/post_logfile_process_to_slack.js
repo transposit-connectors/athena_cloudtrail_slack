@@ -7,8 +7,8 @@
 	api.run("this.post_chat_message",{text:text, channel: channel_name});
     
     if (process_log_files_result.high_priority_records.length > 0) {
-      const message = "Here are the high priority events, please investigate: "+ (process_log_files_result.high_priority_records.map(r => {
-        return JSON.stringify(r)
+      const message = "Here are the high priority events, please investigate: \n"+ (process_log_files_result.high_priority_records.map(r => {
+        return r.eventID
       }).join("\n"));
       api.run("this.post_chat_message", {text: message, channel: channel_name});
 
