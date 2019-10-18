@@ -117,6 +117,16 @@
           "js": "post_user_query_results_to_slack.js",
           "lang": "js"
         }
+      }, {
+        "id": "list_objects_v2",
+        "tql": {
+          "tql": "SELECT * FROM aws_s3.list_objects_v2\n  WHERE Bucket='mooreds-cloudtrail'\n  AND prefix='AWSLogs/425414788231/CloudTrail/'\n  LIMIT 10\n\n/*\n * For sample code and reference material, visit\n * https://www.transposit.com/docs/get-started/sql-quickstart\n */"
+        }
+      }, {
+        "id": "describe_regions",
+        "tql": {
+          "tql": "SELECT DescribeRegionsResponse.regionInfo.item FROM aws_ec2.describe_regions\n"
+        }
       }],
       "dataConnections": [{
         "ref": "slack_identify.raw",
