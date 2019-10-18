@@ -86,7 +86,7 @@
             "name": "text",
             "type": "STRING"
           }],
-          "tql": "SELECT * FROM slack.post_chat_message\n  WHERE $body=(SELECT {\n   \n    'channel' : 'cloudtrail',\n    \n    'as_user' : false,   \n    'text' : @text,\n\n  })\n"
+          "tql": "SELECT * FROM slack.post_chat_message\n  WHERE $body=(SELECT {\n    'channel' : 'cloudtrail',\n    'as_user' : false,   \n    'text' : @text,\n  })\n"
         }
       }, {
         "id": "post_logfile_process_to_slack",

@@ -3,8 +3,16 @@
   if (process_log_files_result.count > 0) {
     const count = process_log_files_result.count;
     const text = "Processed "+count+" cloudwatch log file" + (count == 1 ? "" : "s");
-	api.query("SELECT * FROM slack.post_chat_message WHERE $body=(SELECT { 'channel' : 'cloudtrail','as_user' : false, 'text' : @text})",{text:text});
+	api.run("this.post_chat_message",{text:text});
+    
+    const message = "Here are the high priority events, please investigate: "+ (process_log_files_result.high_priority_records.map(r => {
+      return e.eventID
+    }).join("\n"));
+          
+    api.run("this.post_chat_message", {text: message});
   }
+  
+  
 }
 
 /*
