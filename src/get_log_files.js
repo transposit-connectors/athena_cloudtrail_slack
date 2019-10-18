@@ -55,7 +55,7 @@
     });
     
     high_priority_records.append(result_records.filter(r => {
-      return r.xpriority == 'HIGH';
+      return r && r.xpriority == 'HIGH';
     }));
     
 

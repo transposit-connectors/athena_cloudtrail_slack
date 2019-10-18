@@ -84,9 +84,16 @@
         "tql": {
           "parameters": [{
             "name": "text",
-            "type": "STRING"
+            "description": "Text to post",
+            "type": "STRING",
+            "required": true
+          }, {
+            "name": "channel",
+            "description": "Channel name",
+            "type": "STRING",
+            "required": true
           }],
-          "tql": "SELECT * FROM slack.post_chat_message\n  WHERE $body=(SELECT {\n    'channel' : 'cloudtrail',\n    'as_user' : false,   \n    'text' : @text,\n  })\n"
+          "tql": "SELECT * FROM slack.post_chat_message\n  WHERE $body=(SELECT {\n    'channel' : @channel,\n    'as_user' : false,   \n    'text' : @text,\n  })\n"
         }
       }, {
         "id": "post_logfile_process_to_slack",
