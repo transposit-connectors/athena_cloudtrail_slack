@@ -172,6 +172,15 @@
             }
           }
         }
+      }, {
+        "ref": "aws_ec2",
+        "overrides": {
+          "aws": {
+            "region": "us-east-2",
+            "executionLimits": {
+            }
+          }
+        }
       }],
       "javascriptAPIVersion": "3",
       "source": "src",
