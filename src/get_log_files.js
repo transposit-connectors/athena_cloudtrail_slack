@@ -54,7 +54,7 @@
       });
     });
     
-    high_priority_records.append(result_records.filter(r => {
+    high_priority_records.push(result_records.filter(r => {
       return r && r.xpriority == 'HIGH';
     }));
     
