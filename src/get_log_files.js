@@ -28,7 +28,7 @@
   
   const results = api.run("this.list_objects",{
     bucket_name: bucket_name,
-    log_path: 'AWSLogs/425414788231/CloudTrail/' // CloudTrail/us-east-2/2019/10/'
+    log_path: 'AWSLogs/425414788231/CloudTrail/us-east-2/2019/10/' // CloudTrail/us-east-2/2019/10/'
   });
   
   let high_priority_records = [];
