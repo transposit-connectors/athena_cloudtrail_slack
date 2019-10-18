@@ -4,8 +4,7 @@
   const stash_suffix = "-processed";
   
   const enrich_cloudtrail_object = function(entry, ip_address_to_country) {
-     // break this out to a sep function for easy editing?
-        if (entry.sourceIPAddress) {
+            if (entry.sourceIPAddress) {
           const ip = entry.sourceIPAddress;
           if (ip_address_to_country[ip] === undefined) {
             const country_code = api.run("this.get_country_from_ip",{ipaddress:ip})[0].country_code;
@@ -24,11 +23,12 @@
         if (entry.eventSource == "s3.amazonaws.com") {
           entry.xpriority = "MED";
         }
+    return entry;
   };
   
   const results = api.run("this.list_objects",{
     bucket_name: bucket_name,
-    log_path: 'AWSLogs/425414788231/CloudTrail/us-east-2/2019/10/' // CloudTrail/us-east-2/2019/10/'
+    log_path: 'AWSLogs/425414788231/CloudTrail/us-east-2/2019/10' // CloudTrail/us-east-2/2019/10/'
   });
   
   let high_priority_records = [];
@@ -53,12 +53,10 @@
         result_records.push(entry);
       });
     });
-    
+
     high_priority_records.push(result_records.filter(r => {
       return r && r.xpriority == 'HIGH';
-    }));
-    
-
+    })); 
     
     // athena wants json with each record on a different line
     const body = result_records.map(r => JSON.stringify(r)).join("\n");
