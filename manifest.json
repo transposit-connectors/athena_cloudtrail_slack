@@ -186,6 +186,9 @@
       }, {
         "name": "cloudtrail_initial_prefix",
         "type": "STRING"
+      }, {
+        "name": "cloudtrail_processed_prefix",
+        "type": "STRING"
       }]
     },
     "description": "Monitors CloudTrail for suspcious events, pushes notice to slack.",
