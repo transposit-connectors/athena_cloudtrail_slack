@@ -179,7 +179,11 @@
       }],
       "javascriptAPIVersion": "3",
       "source": "src",
-      "userSettingsDisplay": "GENERATED"
+      "userSettingsDisplay": "GENERATED",
+      "appSettings": [{
+        "name": "cloudtrail_bucket_name",
+        "type": "STRING"
+      }]
     },
     "description": "Monitors CloudTrail for suspcious events, pushes notice to slack.",
     "displayName": "CloudTrail to Slack"
