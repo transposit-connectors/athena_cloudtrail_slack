@@ -64,6 +64,7 @@
     const key = keyObj.Key;
     console.log("processing: "+key);
     if (stash.get(key + stash_suffix)) {
+      console.log("saw this, skipping: "+key);
       return;
     }
     const content = api.query("SELECT * FROM aws_s3.get_object WHERE Bucket=@bucket_name AND Key=@key", {
