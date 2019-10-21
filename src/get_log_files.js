@@ -69,6 +69,7 @@
     //console.log(keyObj.Key);
     const key = keyObj.Key;
     if (stash.get(key+stash_suffix)) {
+      console.log("already processed");
       return;
     }
     const content = api.query("SELECT * FROM aws_s3.get_object WHERE Bucket=@bucket_name AND Key=@key",{key:key, bucket_name: bucket_name});
@@ -95,19 +96,18 @@
     const body = result_records.map(r => JSON.stringify(r)).join("\n");
     // can't gzip it just yet
     const processed_key = (processed_prefix + key).replace(".gz","");
-    //console.log("pushing: "+processed_key);
+    console.log("pushing: "+processed_key);
     const res = api.query("SELECT * FROM aws_s3.put_object WHERE Bucket=@bucket_name AND Key=@key AND $body=@body", {
       bucket_name: bucket_name,
       key: processed_key,
       body: body
     });
     
-    
     //console.log(res);
     if (res != "success") {
       console.log("error processing: "+key);
     } else {
-      stash.put(key+stash_suffix,true);
+     // stash.put(key+stash_suffix,true);
       count++;
     }
     //console.log(content[0]);
