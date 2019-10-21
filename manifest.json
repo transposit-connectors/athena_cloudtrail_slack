@@ -189,6 +189,9 @@
       }, {
         "name": "cloudtrail_processed_prefix",
         "type": "STRING"
+      }, {
+        "name": "athena_results_prefix",
+        "type": "STRING"
       }]
     },
     "description": "Monitors CloudTrail for suspcious events, pushes notice to slack.",
