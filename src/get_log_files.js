@@ -41,22 +41,22 @@
   const log_path_prefix = 'AWSLogs/425414788231/CloudTrail/' // XXX needs to be an env var
   regionNames.forEach(rn => {
     
-    const log_path = log_path_prefix + rn + year_month;
-// console.log(log_path);
+    const log_path = log_path_prefix + rn + year_month+"18/"; // for esting only
+    console.log(log_path);
     const one_region_results = api.run("this.list_objects",{
       bucket_name: bucket_name,
       log_path: log_path
     });
     
-    // console.log(one_region_results);
-    results = results.concat(one_region_results); 
+//     // console.log(one_region_results);
+//     results = results.concat(one_region_results); 
     
-    const log_path_yesterday = log_path_prefix + rn + year_month_day_for_yesterday; // pick up yesterday just in case
-    const one_region_results_yday = api.run("this.list_objects",{
-      bucket_name: bucket_name,
-      log_path: log_path_yesterday
-    });
-    results = results.concat(one_region_results_yday); 
+//     const log_path_yesterday = log_path_prefix + rn + year_month_day_for_yesterday; // pick up yesterday just in case
+//     const one_region_results_yday = api.run("this.list_objects",{
+//       bucket_name: bucket_name,
+//       log_path: log_path_yesterday
+//     });
+//     results = results.concat(one_region_results_yday); 
   });
   // console.log("before results")
   // console.log(results);
@@ -95,7 +95,7 @@
     const body = result_records.map(r => JSON.stringify(r)).join("\n");
     // can't gzip it just yet
     const processed_key = (processed_prefix + key).replace(".gz","");
-    console.log("pushing: "+processed_key);
+    //console.log("pushing: "+processed_key);
     const res = api.query("SELECT * FROM aws_s3.put_object WHERE Bucket=@bucket_name AND Key=@key AND $body=@body", {
       bucket_name: bucket_name,
       key: processed_key,
