@@ -35,17 +35,25 @@
   );
 
   const moment = require('moment-timezone-with-data.js');
-  const year_month = moment().format('/YYYY/MM');  
+  const year_month = moment().format('/YYYY/MM');
+  const year_month_day_for_yesterday = moment().add(-1).format('/YYYY/MM/dd')
   const results = [];
   const log_path_prefix = 'AWSLogs/425414788231/CloudTrail/' // XXX needs to be an env var
   regionNames.forEach(rn => {
     const log_path = log_path_prefix + rn + year_month;
-    console.log("my prefix: "+log_path);
+
     const one_region_results = api.run("this.list_objects",{
       bucket_name: bucket_name,
       log_path: log_path
     });
     results.concat(one_region_results); 
+    
+    const log_path_yesterday = log_path_prefix + rn + year_month_day_for_yesterday; // pick up yesterday just in case
+    const one_region_results_yday = api.run("this.list_objects",{
+      bucket_name: bucket_name,
+      log_path: log_path_yesterday
+    });
+    results.concat(one_region_results_yday); 
   });
   
   let high_priority_records = [];
