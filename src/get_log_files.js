@@ -89,7 +89,7 @@
       return r && r.xpriority == 'HIGH';
     })); 
     
-    console.log(high_priority_records)
+    // console.log(high_priority_records)
     
     // athena wants json with each record on a different line
     const body = result_records.map(r => JSON.stringify(r)).join("\n");
