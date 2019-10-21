@@ -68,9 +68,9 @@
     const result_records = [];
     //console.log(keyObj.Key);
     const key = keyObj.Key;
-    // if (stash.get(key+stash_suffix)) {
-    //   return;
-    // }
+    if (stash.get(key+stash_suffix)) {
+      return;
+    }
     const content = api.query("SELECT * FROM aws_s3.get_object WHERE Bucket=@bucket_name AND Key=@key",{key:key, bucket_name: bucket_name});
     //console.log(content);
     //if (content )
