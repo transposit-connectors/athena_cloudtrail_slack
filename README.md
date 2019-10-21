@@ -17,8 +17,8 @@ You'll also need an AWS account. You'll need to create an S3 bucket and enable C
 ## Transposit setup
 
   * Fork the app [https://console.transposit.com/t/transposit-sample/athena_cloudtrail_slack](https://console.transposit.com/t/transposit-sample/athena_cloudtrail_slack) (find the Fork button at the top of the editor view).
-  * Edit the `enrich_cloudtrail_object` function at the top of the `get_log_files` operation. This is where you can mark certain events high priority. Currently the sample code flags the following events as high priority:
-    * Creation of a new IAM user
+  * Edit the `enrich_cloudtrail_object` function at the top of the `get_log_files` operation. This is where you mark interesting events with a priority. Currently the sample code flags the following events as high priority:
+    * Creation of a new IAM user.
     * Access to any API from a non US IP address.
   * Navigate to **Deploy > Production Keys** and add keys for all the data connectors.
   * Navigate to **Deploy > Environment Variables** and fill out the following environment variables:
@@ -27,5 +27,5 @@ You'll also need an AWS account. You'll need to create an S3 bucket and enable C
     * `cloudtrail_processed_prefix`: by default the system stores the enriched log files in the same bucket and key as the unprocessed CloudTrail logs, except the key has this prefix added to it.
     * `athena_results_prefix`: the location (under `cloudtrail_bucket_name`) where we store Athena results.
     * `slack_channel`: the name of the Slack channel you created above.
-  * Navigate to **Deploy > Scheduled Tasks** and set up the `scheduled_job` operation on whatever schedule you'd like notifications to occur.
+  * Navigate to **Deploy > Scheduled Tasks** and set up the `scheduled_job` operation on whatever schedule you'd like notifications to occur. Running every 10 minutes: `0 /10 * ? * *`
 
