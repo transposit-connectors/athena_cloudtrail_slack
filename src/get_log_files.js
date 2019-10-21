@@ -1,6 +1,6 @@
 (params) => {
-  const bucket_name = 'mooreds-cloudtrail';
-  const processed_prefix = 'processed/';
+  const bucket_name = env.get('cloudtrail_bucket_name');
+  const processed_prefix = env.get('cloudtrail_processed_prefix');
   const stash_suffix = "-processed";
 
   const enrich_cloudtrail_object = function(entry, ip_address_to_country) {
@@ -35,7 +35,7 @@
   const year_month = moment().format('/YYYY/MM/');
   const year_month_day_for_yesterday = moment().add(-1).format('/YYYY/MM/dd/')
   let results = [];
-  const log_path_prefix = 'AWSLogs/425414788231/CloudTrail/' // XXX needs to be an env var
+  const log_path_prefix = env.get('cloudtrail_initial_prefix');
   regionNames.forEach(rn => {
 
     const log_path = log_path_prefix + rn + year_month; // +"18/" for testing only

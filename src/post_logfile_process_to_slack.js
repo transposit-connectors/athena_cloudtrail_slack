@@ -1,5 +1,5 @@
 (params) => {
-  const channel_name = 'cloudtrail';
+  const channel_name = env.get('slack_channel');
   const process_log_files_result = api.run("this.get_log_files")[0];
   if (process_log_files_result.count > 0) {
     const count = process_log_files_result.count;

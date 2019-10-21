@@ -9,8 +9,8 @@
     };
   }
   
-  const bucket_name = 'mooreds-cloudtrail';
-  const athena_prefix = 'athena-output/';
+  const bucket_name = env.get('cloudtrail_bucket_name');
+  const athena_prefix = env.get('athena_results_prefix')
   const text_we_saw = http_event.parsed_body.event.text;
   const sent_by_bot = http_event.parsed_body.event.bot_id != null;
   
