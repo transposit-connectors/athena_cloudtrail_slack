@@ -26,9 +26,26 @@
     return entry;
   };
   
-  const results = api.run("this.list_objects",{
-    bucket_name: bucket_name,
-    log_path: 'AWSLogs/425414788231/CloudTrail/us-east-2/2019/10' // CloudTrail/us-east-2/2019/10/'
+  const regions = api.query("SELECT DescribeRegionsResponse.regionInfo.item FROM aws_ec2.describe_regions")[0];
+  
+  const regionNames = [];
+  regions.item.forEach(r =>{
+    regionNames.push(r.regionName);
+  }
+  );
+
+  const moment = require('moment-timezone-with-data.js');
+  const year_month = moment().format('/YYYY/MM');  
+  const results = [];
+  const log_path_prefix = 'AWSLogs/425414788231/CloudTrail/' // XXX needs to be an env var
+  regionNames.forEach(rn => {
+    const log_path = log_path_prefix + rn + year_month;
+    console.log("my prefix: "+log_path);
+    const one_region_results = api.run("this.list_objects",{
+      bucket_name: bucket_name,
+      log_path: log_path
+    });
+    results.concat(one_region_results); 
   });
   
   let high_priority_records = [];
@@ -38,9 +55,9 @@
     const result_records = [];
     //console.log(keyObj.Key);
     const key = keyObj.Key;
-    if (stash.get(key+stash_suffix)) {
-      return;
-    }
+    // if (stash.get(key+stash_suffix)) {
+    //   return;
+    // }
     const content = api.query("SELECT * FROM aws_s3.get_object WHERE Bucket=@bucket_name AND Key=@key",{key:key, bucket_name: bucket_name});
     //console.log(content);
     //if (content )
@@ -57,6 +74,8 @@
     high_priority_records.push(result_records.filter(r => {
       return r && r.xpriority == 'HIGH';
     })); 
+    
+    console.log(high_priority_records)
     
     // athena wants json with each record on a different line
     const body = result_records.map(r => JSON.stringify(r)).join("\n");
