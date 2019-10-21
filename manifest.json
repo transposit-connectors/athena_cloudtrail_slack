@@ -192,6 +192,9 @@
       }, {
         "name": "athena_results_prefix",
         "type": "STRING"
+      }, {
+        "name": "slack_channel",
+        "type": "STRING"
       }]
     },
     "description": "Monitors CloudTrail for suspcious events, pushes notice to slack.",
