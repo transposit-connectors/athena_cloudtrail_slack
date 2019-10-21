@@ -18,12 +18,8 @@
         console.log("saw non us country");
       }
     }
-    if (entry.eventSource == "iam.amazonaws.com") {
+    if (entry.eventSource == "iam.amazonaws.com" && entry.eventName == "CreateUser") {
       entry.xpriority = "HIGH";
-      console.log("saw IAM event");
-    }
-    if (entry.eventSource == "s3.amazonaws.com") {
-      entry.xpriority = "MED";
     }
     return entry;
   };
