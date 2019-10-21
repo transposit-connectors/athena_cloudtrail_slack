@@ -96,7 +96,7 @@
     if (res != "success") {
       console.log("error processing: " + key);
     } else {
-      // stash.put(key+stash_suffix,true);
+      stash.put(key+stash_suffix,true);
       count++;
     }
   });
