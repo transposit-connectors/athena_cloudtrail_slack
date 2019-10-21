@@ -59,8 +59,10 @@
   let count = 0;
   const ip_address_to_country = {}; // to save on ip calls, we only get 10k
   results.forEach((keyObj) => {
+    
     const result_records = [];
     const key = keyObj.Key;
+    console.log("processing: "+key);
     if (stash.get(key + stash_suffix)) {
       return;
     }
