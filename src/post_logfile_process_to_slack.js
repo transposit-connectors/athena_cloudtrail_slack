@@ -8,7 +8,6 @@
       text: text,
       channel: channel_name
     });
-    console.log(process_log_files_result.high_priority_records);
     if (process_log_files_result.high_priority_records.length > 0) {
       const message = "Here are the high priority events, please investigate: \n" + (process_log_files_result.high_priority_records.map(r => {
         return r.eventID + "/" + r.eventSource + "/" + r.eventName

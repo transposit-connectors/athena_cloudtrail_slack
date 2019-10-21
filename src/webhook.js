@@ -11,8 +11,6 @@
   
   const bucket_name = 'mooreds-cloudtrail';
   const athena_prefix = 'athena-output/';
-  console.log("here");
-  console.log(http_event.parsed_body);
   const text_we_saw = http_event.parsed_body.event.text;
   const sent_by_bot = http_event.parsed_body.event.bot_id != null;
   
@@ -46,14 +44,12 @@
     });
     
     const athena_output_s3_path = "s3://"+bucket_name + "/" + athena_prefix;
-    console.log(athena_output_s3_path);
     const results = api.run("athena_library.runQuery", {
       query:"select * from cloudtrail_enriched where xpriority = 'HIGH' order by eventtime desc limit 5",                                
       resultlocation: athena_output_s3_path
     })[0];
     const queryId = results.queryId;
     stash.put("query-id", queryId);
-    console.log(queryId);
   });
   
   let moment = require('moment-timezone-with-data.js');

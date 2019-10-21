@@ -1,7 +1,6 @@
 (params) => {
   let text = "The following high priority events happened recently\n";
   const queryId = stash.get("query-id");
-  // console.log(queryId);
   const results = api.run("athena_library.getQueryResults", {
     queryId: queryId
   });
