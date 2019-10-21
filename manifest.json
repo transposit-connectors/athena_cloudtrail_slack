@@ -40,16 +40,6 @@
           "webhook": true
         }
       }, {
-        "id": "get_slack_message",
-        "function": {
-          "parameters": [{
-            "name": "user",
-            "type": "STRING"
-          }],
-          "js": "get_slack_message.js",
-          "lang": "js"
-        }
-      }, {
         "id": "list_objects",
         "tql": {
           "parameters": [{
@@ -116,11 +106,6 @@
         "function": {
           "js": "post_user_query_results_to_slack.js",
           "lang": "js"
-        }
-      }, {
-        "id": "list_objects_v2",
-        "tql": {
-          "tql": "SELECT * FROM aws_s3.list_objects_v2\n  WHERE Bucket='mooreds-cloudtrail'\n  AND prefix='AWSLogs/425414788231/CloudTrail/'\n  LIMIT 10\n\n/*\n * For sample code and reference material, visit\n * https://www.transposit.com/docs/get-started/sql-quickstart\n */"
         }
       }, {
         "id": "describe_regions",
