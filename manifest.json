@@ -180,6 +180,8 @@
       "javascriptAPIVersion": "3",
       "source": "src",
       "userSettingsDisplay": "GENERATED"
-    }
+    },
+    "description": "Monitors CloudTrail for suspcious events, pushes notice to slack.",
+    "displayName": "CloudTrail to Slack"
   }
 }
