@@ -56,10 +56,13 @@
     });
 
     const athena_output_s3_path = "s3://" + bucket_name + "/" + athena_prefix;
+    const query = "select * from cloudtrail_enriched where eventid = '"+event_id+"'";
+    console.log(query);
     const results = api.run("athena_library.runQuery", {
-      query: "select * from cloudtrail_enriched where eventid = '"+event_id+"'",
+      query: query,
       resultlocation: athena_output_s3_path
     })[0];
+    console.log(results);
     const queryId = results.queryId;
     stash.put("query-id", queryId);
   });
