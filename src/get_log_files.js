@@ -33,7 +33,9 @@
 
   const moment = require('moment-timezone-with-data.js');
   const year_month = moment().format('/YYYY/MM/');
-  const year_month_day_for_yesterday = moment().add(-1).format('/YYYY/MM/dd/')
+  const year_month_for_yesterday = moment().add(-1, 'days').format('/YYYY/MM/');
+  const look_up_yesterday = year_month != year_month_for_yesterday;
+  const year_month_day_for_yesterday = moment().add(-1, 'days').format('/YYYY/MM/dd/');
   let results = [];
   const log_path_prefix = env.get('cloudtrail_initial_prefix');
   regionNames.forEach(rn => {
@@ -46,13 +48,14 @@
     });
 
     results = results.concat(one_region_results);
-
-    const log_path_yesterday = log_path_prefix + rn + year_month_day_for_yesterday; // pick up yesterday just in case
-    const one_region_results_yday = api.run("this.list_objects", {
-      bucket_name: bucket_name,
-      log_path: log_path_yesterday
-    });
-    results = results.concat(one_region_results_yday);
+    if (look_up_yesterday) {
+      const log_path_yesterday = log_path_prefix + rn + year_month_day_for_yesterday; // pick up yesterday just in case
+      const one_region_results_yday = api.run("this.list_objects", {
+        bucket_name: bucket_name,
+        log_path: log_path_yesterday
+      });
+      results = results.concat(one_region_results_yday);
+    }
   });
 
   let high_priority_records = [];
