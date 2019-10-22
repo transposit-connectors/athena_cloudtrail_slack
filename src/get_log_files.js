@@ -78,7 +78,7 @@
 
       count++;
       if (high_priority_records.length > 0) {
-        const message = "Here are the high priority events, please investigate: \n" + (high_priority_records.map(r => {
+        const message = "Here are high priority events, please investigate: \n" + (high_priority_records.map(r => {
           return r.eventID;
         }).join("\n"));
         api.run("this.post_chat_message", {
