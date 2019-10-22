@@ -37,7 +37,7 @@
     
     const result_records = [];
     const key = keyObj.Key;
-    console.log("processing: "+key);
+    //console.log("processing: "+key);
     if (stash.get(key + stash_suffix)) {
       //console.log("saw this, skipping: "+key);
       return;
