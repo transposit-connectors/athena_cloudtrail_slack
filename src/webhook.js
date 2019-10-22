@@ -9,6 +9,7 @@
     };
   }
 
+  const slack_channel = env.get('slack_channel');
   const bucket_name = env.get('cloudtrail_bucket_name');
   const athena_prefix = env.get('athena_results_prefix')
   const text_we_saw = http_event.parsed_body.event.text;
@@ -27,7 +28,8 @@
   if ((!text_we_saw) || (!understood_command)) {
     setImmediate(() => {
       api.run("this.post_chat_message", {
-        text: error_message
+        text: error_message,
+        channel: slack_channel
       });
     });
     return {
@@ -49,7 +51,8 @@
 
   setImmediate(() => {
     api.run("this.post_chat_message", {
-      text: text
+      text: text,
+      channel: slack_channel
     });
 
     const athena_output_s3_path = "s3://" + bucket_name + "/" + athena_prefix;

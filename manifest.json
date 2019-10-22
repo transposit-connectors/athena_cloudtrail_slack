@@ -18,6 +18,9 @@
       }, {
         "name": "transposit/ipstack:v1.*.*",
         "alias": "ipstack"
+      }, {
+        "name": "transposit/aws_ec2:v2.*.*",
+        "alias": "aws_ec2"
       }],
       "operations": [{
         "id": "webhook",
@@ -103,11 +106,6 @@
         "function": {
           "js": "post_user_query_results_to_slack.js",
           "lang": "js"
-        }
-      }, {
-        "id": "describe_regions",
-        "tql": {
-          "tql": "SELECT DescribeRegionsResponse.regionInfo.item FROM aws_ec2.describe_regions\n"
         }
       }],
       "dataConnections": [{
