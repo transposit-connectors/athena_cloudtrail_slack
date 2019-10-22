@@ -10,12 +10,17 @@ This integration will do three things:
 
 ## Before you start
 
-You'll need a free Transposit account and a free [ipstack](https://ipstack.com/) account. You'll also need the ability to install an application on Slack.
+You'll need a free Transposit account and a free [ipstack](https://ipstack.com/) account for determining the physical location of an IP address. You'll also need the ability to install an application on Slack.
 
-You'll also need an AWS account. You'll need to create an S3 bucket and enable CloudTrail to write to that bucket. You'll need to create an IAM user with the following permissions:
+## AWS setup
 
-  * `AmazonS3FullAccess`
-  * `AmazonAthenaFullAccess`
+You'll need an AWS account. 
+
+  * Create an S3 bucket 
+  * Enable CloudTrail to write to that bucket. 
+  * You'll need to create an IAM user with the following permissions:
+    * `AmazonS3FullAccess`
+    * `AmazonAthenaFullAccess`
 
 ## Slack setup
 
@@ -46,7 +51,7 @@ To interact with your bot, you need to create a Slack App. Here's the [entire gu
   * Set up the Transposit app to act as the bot user by grabbing the client secret and following the [instructions here](https://www.transposit.com/docs/guides/slack/chatbots/#acting-as-your-bot-user).
   * Install the app to your workspace.
 
-## AWS setup
+## AWS setup part 2
 
   * Create the Athena table (the script is also in the git repo). The values in brackets below need to be replaced with the real values as specified in the environment variables above.
 
