@@ -18,9 +18,6 @@
       }, {
         "name": "transposit/ipstack:v1.*.*",
         "alias": "ipstack"
-      }, {
-        "name": "transposit/aws_ec2:v2.*.*",
-        "alias": "aws_ec2"
       }],
       "operations": [{
         "id": "webhook",
