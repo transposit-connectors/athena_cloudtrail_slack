@@ -189,7 +189,7 @@
         "type": "STRING"
       }]
     },
-    "description": "Monitors CloudTrail for suspcious events, pushes notice to slack.",
+    "description": "Monitors CloudTrail for suspicious events, pushes notice to slack.",
     "displayName": "CloudTrail to Slack"
   }
 }
