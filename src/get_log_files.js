@@ -24,40 +24,43 @@
     return entry;
   };
 
-  const regions = api.query("SELECT DescribeRegionsResponse.regionInfo.item FROM aws_ec2.describe_regions")[0];
+//   const regions = api.query("SELECT DescribeRegionsResponse.regionInfo.item FROM aws_ec2.describe_regions")[0];
 
-  const regionNames = [];
-  regions.item.forEach(r => {
-    regionNames.push(r.regionName);
-  });
+//   const regionNames = [];
+//   regions.item.forEach(r => {
+//     regionNames.push(r.regionName);
+//   });
 
-  const moment = require('moment-timezone-with-data.js');
-  const year_month = moment().format('/YYYY/MM/');
-  const year_month_for_yesterday = moment().add(-1, 'days').format('/YYYY/MM/');
-  const look_up_yesterday = year_month != year_month_for_yesterday;
-  const year_month_day_for_yesterday = moment().add(-1, 'days').format('/YYYY/MM/dd/');
-  let results = [];
+//   const moment = require('moment-timezone-with-data.js');
+//   const year_month = moment().format('/YYYY/MM/');
+//   const year_month_day_for_yesterday = moment().add(-1).format('/YYYY/MM/dd/')
+//   let results = [];
+//   const log_path_prefix = env.get('cloudtrail_initial_prefix');
+//   regionNames.forEach(rn => {
+
+//     const log_path = log_path_prefix + rn + year_month; // +"18/" for testing only
+//     //console.log(log_path);
+//     const one_region_results = api.run("this.list_objects", {
+//       bucket_name: bucket_name,
+//       log_path: log_path
+//     });
+
+//     results = results.concat(one_region_results);
+
+//     const log_path_yesterday = log_path_prefix + rn + year_month_day_for_yesterday; // pick up yesterday just in case
+//     const one_region_results_yday = api.run("this.list_objects", {
+//       bucket_name: bucket_name,
+//       log_path: log_path_yesterday
+//     });
+//     results = results.concat(one_region_results_yday);
+//   });
+
   const log_path_prefix = env.get('cloudtrail_initial_prefix');
-  regionNames.forEach(rn => {
-
-    const log_path = log_path_prefix + rn + year_month; // +"18/" for testing only
-    //console.log(log_path);
-    const one_region_results = api.run("this.list_objects", {
+  const results = api.run("this.list_objects", {
       bucket_name: bucket_name,
-      log_path: log_path
+      log_path: log_path_prefix
     });
-
-    results = results.concat(one_region_results);
-    if (look_up_yesterday) {
-      const log_path_yesterday = log_path_prefix + rn + year_month_day_for_yesterday; // pick up yesterday just in case
-      const one_region_results_yday = api.run("this.list_objects", {
-        bucket_name: bucket_name,
-        log_path: log_path_yesterday
-      });
-      results = results.concat(one_region_results_yday);
-    }
-  });
-
+  
   let high_priority_records = [];
   let count = 0;
   const ip_address_to_country = {}; // to save on ip calls, we only get 10k
