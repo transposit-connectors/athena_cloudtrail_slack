@@ -6,6 +6,8 @@
     queryId: queryId
   });
 
+  console.log("hjere");
+  console.log(results);
   text += JSON.stringify(results);
 
   api.run("this.post_chat_message", {
