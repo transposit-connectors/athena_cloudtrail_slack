@@ -90,8 +90,7 @@
       return r && r.xpriority == 'HIGH';
     })
     high_priority_records = high_priority_records.concat(high_priority_results);
-
-
+    
     // athena wants json with each record on a different line
     const body = result_records.map(r => JSON.stringify(r)).join("\n");
     // can't gzip it just yet
@@ -106,7 +105,18 @@
       console.log("error processing: " + key);
     } else {
       stash.put(key+stash_suffix,true);
+        const channel_name = env.get('slack_channel');
+
       count++;
+      if (high_priority_records.length > 0) {
+        const message = "Here are the high priority events, please investigate: \n" + (high_priority_records.map(r => {
+          return r.eventID + "/" + r.eventSource + "/" + r.eventName
+        }).join("\n"));
+        api.run("this.post_chat_message", {
+          text: message,
+          channel: channel_name
+        });
+      }
     }
   });
 
