@@ -1,6 +1,6 @@
 (params) => {
   const slack_channel = env.get('slack_channel');
-  let text = "The following high priority events happened recently\n";
+  let text = "";
   const queryId = stash.get("query-id");
   const results = api.run("athena_library.getQueryResults", {
     queryId: queryId
