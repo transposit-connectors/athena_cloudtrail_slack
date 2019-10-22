@@ -13,6 +13,7 @@
   const athena_prefix = env.get('athena_results_prefix')
   const text_we_saw = http_event.parsed_body.event.text;
   const sent_by_bot = http_event.parsed_body.event.bot_id != null;
+  const error_message = "Hello there. I saw: " + text_we_saw +". But I don't understand what to do. Please ask me to 'check most recent'"
   
   if (sent_by_bot) {
     return {
@@ -25,7 +26,7 @@
   if ((!text_we_saw) || (!check_most_recent)) {
     setImmediate(() => {
       api.run("this.post_chat_message", {
-        text: "hello there. I saw: " + text_we_saw +". But I don't understand what to do. Please ask me to 'check most recent'"
+        text: error_message
       });
     });
     return {
@@ -61,7 +62,3 @@
     status_code: 200,
   };
 }
-
-// TODO
-// break out enrich to sep function
-// make check today useful
