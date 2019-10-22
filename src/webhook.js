@@ -43,7 +43,7 @@
     const command_args = text_we_saw.split(/ +/);
     if (command_args.length >=4) {
       event_id = command_args[3];
-      text = "OK, I'll get more info about event ["+event_id+"] .... This may take a minute."
+      text = "OK, I'll get more info about event '"+event_id+"'.... This may take a minute."
     } else {
       text = error_message;
     }
