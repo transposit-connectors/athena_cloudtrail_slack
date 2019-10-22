@@ -15,7 +15,7 @@
       if (ip_address_to_country[ip] != 'US') {
         entry.xpriority = "HIGH";
         entry.xcountry_code = ip_address_to_country[ip];
-        console.log("saw non us country");
+        //console.log("saw non us country");
       }
     }
     if (entry.eventSource == "iam.amazonaws.com" && entry.eventName == "CreateUser") {
@@ -39,7 +39,7 @@
     const key = keyObj.Key;
     console.log("processing: "+key);
     if (stash.get(key + stash_suffix)) {
-      console.log("saw this, skipping: "+key);
+      //console.log("saw this, skipping: "+key);
       return;
     }
     const content = api.query("SELECT * FROM aws_s3.get_object WHERE Bucket=@bucket_name AND Key=@key", {
@@ -74,7 +74,7 @@
       console.log("error processing: " + key);
     } else {
       stash.put(key+stash_suffix,true);
-        const channel_name = env.get('slack_channel');
+      const channel_name = env.get('slack_channel');
 
       count++;
       if (high_priority_records.length > 0) {
