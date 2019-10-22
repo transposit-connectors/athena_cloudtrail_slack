@@ -6,9 +6,7 @@
     queryId: queryId
   });
 
-  text += results.map((r) => {
-    return JSON.stringify(r);
-  }).join("\n");
+  text += JSON.stringify(results);
 
   api.run("this.post_chat_message", {
     text: text,
