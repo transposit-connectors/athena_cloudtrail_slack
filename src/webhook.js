@@ -15,7 +15,7 @@
   const text_we_saw = http_event.parsed_body.event.text;
   const sent_by_bot = http_event.parsed_body.event.bot_id != null;
   const command_text = "check out"
-  const error_message = "Hello there. I saw: " + text_we_saw + ". But I don't understand what to do. Please ask me to '"+command_text+" [event_id]'";
+  const error_message = "Hello there. I saw: '" + text_we_saw + "'. But I don't understand what to do. Please ask me to '"+command_text+" [event_id]'";
 
   if (sent_by_bot) {
     return {
