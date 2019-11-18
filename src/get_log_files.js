@@ -1,7 +1,8 @@
 (params) => {
   const bucket_name = env.get('cloudtrail_bucket_name');
   const processed_prefix = env.get('cloudtrail_processed_prefix');
-  const stash_suffix = "-processed";
+  
+  const CryptoJS = require("crypto-js");
 
   const enrich_cloudtrail_object = function(entry, ip_address_to_country) {
     if (entry.sourceIPAddress) {
@@ -30,6 +31,7 @@
       log_path: log_path_prefix
     });
   
+  
   let high_priority_records = [];
   let count = 0;
   const ip_address_to_country = {}; // to save on ip calls, we only get 10k
@@ -37,8 +39,9 @@
     
     const result_records = [];
     const key = keyObj.Key;
+    const hash = CryptoJS.MD5(key);
     //console.log("processing: "+key);
-    if (stash.get(key + stash_suffix)) {
+    if (stash.get(hash)) {
       //console.log("saw this, skipping: "+key);
       return;
     }
@@ -73,7 +76,7 @@
     if (res != "success") {
       console.log("error processing: " + key);
     } else {
-      stash.put(key+stash_suffix,true);
+      stash.put(hash,true);
       const channel_name = env.get('slack_channel');
 
       count++;
