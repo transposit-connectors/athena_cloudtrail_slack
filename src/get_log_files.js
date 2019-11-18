@@ -39,7 +39,7 @@
     
     const result_records = [];
     const key = keyObj.Key;
-    const hash = CryptoJS.MD5(key);
+    const hash = CryptoJS.MD5(key).toString(CryptoJS.enc.Base64);
     //console.log("processing: "+key);
     if (stash.get(hash)) {
       //console.log("saw this, skipping: "+key);
