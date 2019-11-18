@@ -147,6 +147,7 @@
           "aws": {
             "region": "us-east-2",
             "executionLimits": {
+              "maxApiCalls": 1000000
             }
           }
         }
