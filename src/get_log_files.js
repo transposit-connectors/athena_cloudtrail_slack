@@ -80,7 +80,7 @@
       const channel_name = env.get('slack_channel');
 
       count++;
-     /* if (high_priority_records.length > 0) {
+      if (high_priority_records.length > 0) {
         const message = "Here are high priority events, please investigate: \n" + (high_priority_records.map(r => {
           return r.eventID;
         }).join("\n"));
@@ -89,7 +89,7 @@
           channel: channel_name
         });
       }
-      */
+      
     }
   });
 
