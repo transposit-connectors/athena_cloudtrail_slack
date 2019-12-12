@@ -1,4 +1,4 @@
-# CloudTrail To Slack
+# CloudTrail to Slack
 
 This integration will do three things:
 
